@@ -37,14 +37,14 @@ suma:
 	mov  $0, %edi
 bucle:
 	mov  (%ebx, %esi, 4), %eax          # %eax = lista[i]
-    cdq                                 # sign_extension(%eax)
+    cltd                                # sign_extension(%eax)
     add %eax, %esi                      # %esi += %eax
     adc %edx, %edi                      # %edi += %edx
     inc %ebp                            # Incrementar el indice
 	cmp %ebp,%ecx			            # comparar con tamaño lista
 	jne bucle			                # si no iguales, bucle
 
-    mov %edi, %edx                      # Pongo lor resultados en %edx
+    mov %edi, %edx                      # Pongo los resultados en %edx
     mov %esi, %eax                      # y en %eax
 
 	pop %ebp			# recuperar %ebp antiguo
