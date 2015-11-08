@@ -47,5 +47,7 @@ bucle:
     mov %edi, %edx                      # Pongo lor resultados en %edx
     mov %esi, %eax                      # y en %eax
 
+    idivl %ecx                          # Hago la media entre N numeros (tamaño lista)
+
 	pop %ebp			# recuperar %ebp antiguo
 	ret
