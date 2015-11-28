@@ -14,7 +14,7 @@
 	unsigned lista[SIZE] = {0x80000000, 0x00100000, 0x00000800, 0x00000001};
 	//unsigned lista[SIZE]={0x7fffffff,0xffefffff,0xfffff7ff,0xfffffffe,0x01000024,0x00356700,0x8900ac00,0x00bd000ef};
 	//unsigned lista[SIZE]={0x0,0x10204080, 0x3590ac06,0x70b0d0e0, 0xffffffff, 0x12345678, 0x9abcdef0, 0xcafebeef};
-	#define RESULT 4 // 8 o 2 per los dos ejemplos anteriores respectivamente
+	#define RESULT 4
 #endif
 
 unsigned parity1(unsigned *array, int len){
