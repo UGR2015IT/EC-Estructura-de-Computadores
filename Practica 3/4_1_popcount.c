@@ -67,10 +67,10 @@ int hamming_asm(unsigned* array, int len){
 }
 
 int hamming_mask(unsigned *array, int len){
-	int result = 0, val=0;
-	int i,j;
+	int result = 0, val, i, j;
 	unsigned x;
 	for (i = 0; i < len; i++){
+		val = 0;
         	x = array[i];	
 		for (j=0;j<8;j++){
 			val += x & 0x1010101;
@@ -79,7 +79,6 @@ int hamming_mask(unsigned *array, int len){
 		val += (val >> 16);
 		val += (val >> 8);
 		result += (val & 0xFF);
-val=0;
 	}
 	return result;
 }

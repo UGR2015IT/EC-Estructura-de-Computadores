@@ -2,8 +2,8 @@
 #include <stdlib.h>	// para exit()
 #include <sys/time.h>	// para gettimeofday(), struct timeval
 
-#define TEST 		1
-#define COPY_PASTE_CALC	0
+#define TEST 		0
+#define COPY_PASTE_CALC	1
 #define WSIZE 8*sizeof(int)
 
 #if ! TEST
