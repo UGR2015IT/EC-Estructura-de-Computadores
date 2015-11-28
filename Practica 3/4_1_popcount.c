@@ -3,8 +3,8 @@
 #include <stdlib.h>	// para exit()
 #include <sys/time.h>	// para gettimeofday(), struct timeval
 
-#define TEST 		0
-#define COPY_PASTE_CALC	1
+#define TEST 		1
+#define COPY_PASTE_CALC	0
 #define WSIZE 8*sizeof(int)
 
 #if ! TEST
@@ -15,7 +15,7 @@
 	unsigned lista[SIZE] = {0x80000000, 0x00100000, 0x00000800, 0x00000001};
 	//unsigned lista[SIZE]={0x7fffffff,0xffefffff,0xfffff7ff,0xfffffffe,0x01000024,0x00356700,0x8900ac00,0x00bd000ef};
 	//unsigned lista[SIZE]={0x0,0x10204080, 0x3590ac06,0x70b0d0e0, 0xffffffff, 0x12345678, 0x9abcdef0, 0xcafebeef};
-	#define RESULT 4 // 8 o 2 per los dos ejemplos anteriores respectivamente
+	#define RESULT 4 // 156 o 116 per los dos ejemplos anteriores respectivamente
 #endif
 
 int resultado=0;
@@ -77,11 +77,11 @@ int hamming_mask(unsigned *array, int len){
 			val += x & 0x1010101;
 			x >>= 1;
 		}
-		result += val;
+		val += (val >> 16);
+		val += (val >> 8);
+		result += (val & 0xFF);
 	}
-	result += (result >> 16);
-	result += (result >> 8);
-	return result & 0xFF;
+	return result;
 }
 
 int hamming_SSSE3(unsigned* array, int len){
