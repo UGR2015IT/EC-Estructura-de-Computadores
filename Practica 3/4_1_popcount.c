@@ -54,11 +54,11 @@ int hamming_asm(unsigned* array, int len){
         x = array[i];
         asm(
 		"\n"
-        	"ini3:                             \n\t"
+        	"loop:                             \n\t"
 		"shr $0x1, %[x]        \n\t"   //Desplazar afecta a CF ZF
 		"adc $0x1, %[r]        \n\t"
 		"test %[x], %[x]       \n\t"
-		"jnz ini3 "
+		"jnz loop "
 
 		: [r] "+r" (result)
 		: [x] "r" (x)               

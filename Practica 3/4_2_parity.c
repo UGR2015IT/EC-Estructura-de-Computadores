@@ -10,11 +10,11 @@
 	#define SIZE (1<<20)
 	unsigned lista[SIZE];
 #else
-	#define SIZE 4	// 8 por los dos ejemplos siguientes
-	unsigned lista[SIZE] = {0x80000000, 0x00100000, 0x00000800, 0x00000001};
+	#define SIZE 8	// 8 por los dos ejemplos siguientes
+	//unsigned lista[SIZE] = {0x80000000, 0x00100000, 0x00000800, 0x00000001};
 	//unsigned lista[SIZE]={0x7fffffff,0xffefffff,0xfffff7ff,0xfffffffe,0x01000024,0x00356700,0x8900ac00,0x00bd000ef};
-	//unsigned lista[SIZE]={0x0,0x10204080, 0x3590ac06,0x70b0d0e0, 0xffffffff, 0x12345678, 0x9abcdef0, 0xcafebeef};
-	#define RESULT 4 // 8 o 2 per los dos ejemplos anteriores respectivamente
+	unsigned lista[SIZE]={0x0,0x10204080, 0x3590ac06,0x70b0d0e0, 0xffffffff, 0x12345678, 0x9abcdef0, 0xcafebeef};
+	#define RESULT 2 // 8 o 2 per los dos ejemplos anteriores respectivamente
 #endif
 
 unsigned parity1(unsigned *array, int len){
@@ -93,11 +93,11 @@ unsigned parity4(unsigned *array, int len){
     x = array[i];
     val = 0;
     asm("\n"
-    "ini3:						\n\t"		//seguir mientras que x!=0
+    "loop:						\n\t"		//seguir mientras que x!=0
     "	xor %[x],%[val]			\n\t"		//realmente solo nos interesa LSB
     "	shr %[x]				\n\t"
     "	test %[x],%[x]			\n\t"
-    "	jnz ini3				\n\t"
+    "	jnz loop				\n\t"
     "	and $1, %[val]			\n\t"
     : [val]"+r" (val)					//e/s: entrada 0, salida paridad elemento
     : [x] "r" (x)						//entrada: valor elemento
@@ -140,8 +140,8 @@ unsigned parity6(unsigned *array, int len){
       "shr $16, %[x] 				\n\t"
       "xor %[x], %%edx			\n\t"
       "xor %%dh, %%dl				\n\t"
-      "setpo %%dl 				\n\t"
-      "movzx %%dl, %[x]			\n\t"
+      "setnp %%dl 				\n\t"
+      "movzx %%dl, %[x]			\n\t"		//devolver en 32 bits
       : [x]"+r" (x)			  		// e/s: entrada valor elemento, salida paridad
       :
       :"edx"						  		//clobber
