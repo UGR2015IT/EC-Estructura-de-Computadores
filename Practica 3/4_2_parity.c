@@ -140,7 +140,7 @@ unsigned parity6(unsigned *array, int len){
       "shr $16, %[x] 				\n\t"
       "xor %[x], %%edx			\n\t"
       "xor %%dh, %%dl				\n\t"
-      "setnp %%dl 				\n\t"
+      "setpo %%dl 				\n\t"
       "movzx %%dl, %[x]			\n\t"		//devolver en 32 bits
       : [x]"+r" (x)			  		// e/s: entrada valor elemento, salida paridad
       :
@@ -149,6 +149,8 @@ unsigned parity6(unsigned *array, int len){
 
       result += x;
     }
+
+return result;
 }
 
 void crono(unsigned (*func)(), char* msg){
