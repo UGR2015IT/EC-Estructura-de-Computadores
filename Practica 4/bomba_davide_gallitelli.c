@@ -1,10 +1,12 @@
+//gcc -m32 bomba_davide_gallitelli.c -o bomba_DavideGallitelli
+
 #include <stdio.h>	// para printf()
 #include <stdlib.h>	// para exit()
 #include <string.h>	// para strncmp()/strlen()
 #include <sys/time.h>	// para gettimeofday(), struct timeval
 
-char password[]="ohutkqtg}ohu";
-int  passcode  = 10203050;
+char password[]="ockzesqlvxlt";
+int passcode = 5216;
 
 void boom(){
 	printf("***************\n");
@@ -21,29 +23,13 @@ void defused(){
 }
 
 void encrypt_pass(char* text){
-	int i=0, lenght = strlen(text)-1, half = lenght/2;
-	char temp;
-	for (i=0;i<lenght/2;i++){
-		temp = text[lenght-i-1];
-		text[lenght-i-1] = text[i]+half;
-		text[i] = temp+half;
-	}
+	int i=0;
+	int lenght = strlen(text)-1;
+	for (i=0;i<lenght;i++)	text[i]=text[i]+i;
 }
 
 int encrypt_code(int code){
-	int temp = code, result = 0, i=1;
-	while (temp != 0){
-		result += temp % 10 * power(10,i);
-		temp = temp / 10;
-		i=i+2;
-	}
-	return result;
-}
-
-int power(int number, int power){
-	int i = 1, value = number;
-	for (i=1;i<power;i++) value = value * number;
-	return value;
+	return (code + 1995);
 }
 
 int main(){
