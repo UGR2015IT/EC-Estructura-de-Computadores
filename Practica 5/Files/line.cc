@@ -37,7 +37,7 @@ int main()
 				}
 			}
 			auto stop = high_resolution_clock::now();
-			s = duration_cast<nanoseconds>(stop - start).count() * line / double(bits.size());
+			s = duration_cast<nanoseconds>(stop - start).count() / double(bits.size());
 		}
 
 		nth_element(sec.begin(), sec.begin() + sec.size() / 2, sec.end());
