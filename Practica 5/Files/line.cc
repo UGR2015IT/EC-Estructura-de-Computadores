@@ -30,13 +30,13 @@ int main()
 		for (auto &s: sec)
 		{
 			auto start = high_resolution_clock::now();
-			/*for (unsigned j = 0; j < line; j++){
+			for (unsigned j = 0; j < line; j++){
 				for (unsigned i = 0; i < SIZE; i+=line){
 					bits.at(i)++;
 				}
-			}*/
-			for (unsigned i=0; i < bits.size(); i++)
-				bits[i] = 1;
+			}
+			//for (unsigned i=0; i < bits.size(); i++)
+			//	bits[i] = 1;
 			auto stop = high_resolution_clock::now();
 			s = duration_cast<nanoseconds>(stop - start).count() / double(bits.size());
 		}
